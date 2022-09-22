@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 public class UserAuthService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
