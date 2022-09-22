@@ -37,8 +37,9 @@ public class Post  {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="userId", referencedColumnName="id")
     private User user;
-//    private Instant createdAt;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name="tagId", referencedColumnName = "id")
-//    private Tag tag;
+
+    //may doubt sa pagalalagay ng cascade dito. ibig sabihin pag binura ko yung post mabubura din lahat ng tag ?
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="tagId", referencedColumnName = "id")
+    private Tag tag;
 }

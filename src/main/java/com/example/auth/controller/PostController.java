@@ -1,6 +1,8 @@
 package com.example.auth.controller;
 
+import com.example.auth.dto.PostResponse;
 import com.example.auth.model.Post;
+import com.example.auth.model.Tag;
 import com.example.auth.model.User;
 import com.example.auth.repository.PostRepository;
 import com.example.auth.repository.UserRepository;
@@ -61,10 +63,16 @@ public class PostController {
         return status(HttpStatus.OK).body(postService.getPost(id));
     }
 
-//    @GetMapping("by-tag/{id}")
-//    public ResponseEntity<List<PostResponse>> getPostsByTag(Long id){
-//        return status(HttpStatus.OK).body(postService.getPostsByTag(id));
-//    }
+    @GetMapping("by-tag/{id}")
+    public ResponseEntity<List<Post>> getPostsByTag(Tag tag){
+        return status(HttpStatus.OK).body(postService.getPostsByTag(tag));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Post> deletePost(@PathVariable Long id){
+        postService.deletePost(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 }
