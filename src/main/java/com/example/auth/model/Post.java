@@ -2,10 +2,15 @@ package com.example.auth.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +19,7 @@ import java.time.Instant;
 @Entity
 @Getter
 @Setter
-public class Post {
+public class Post  {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -25,6 +30,8 @@ public class Post {
     @Lob
     private String body;
     private Integer likes;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch=FetchType.LAZY)
