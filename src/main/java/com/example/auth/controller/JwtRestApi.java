@@ -55,7 +55,7 @@ public class JwtRestApi {
 
         Response response = new Response();
         response.setToken(token);
-        response.setRoles(roles.stream().collect(Collectors.toList()));
+//        response.setRoles(roles.stream().collect(Collectors.toList()));
 
         return new ResponseEntity<Response>(response, HttpStatus.OK);
     }

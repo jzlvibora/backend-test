@@ -5,7 +5,7 @@ import java.util.List;
 public class Request {
     private String username;
     private String userpwd;
-    private List<String> roles;
+//    private List<String> roles;
 
     public String getUsername() {
         return username;
@@ -22,12 +22,12 @@ public class Request {
     public void setUserpwd(String userpwd) {
         this.userpwd = userpwd;
     }
-
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
+//
+//    public List<String> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(List<String> roles) {
+//        this.roles = roles;
+//    }
 }
