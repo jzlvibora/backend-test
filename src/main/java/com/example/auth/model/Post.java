@@ -28,7 +28,7 @@ public class Post {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="userId", referencedColumnName="id")
     private User user;
-    private Instant createdAt;
+//    private Instant createdAt;
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name="tagId", referencedColumnName = "id")
 //    private Tag tag;
