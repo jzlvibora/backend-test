@@ -21,20 +21,15 @@ private final UserRepository userRepository;
         return postRepository.findAll();
     }
 
-//    public List<Post> getPostsByCurrentUser(){
-//        return postRepository.findAllByUsername(currentuserName());
-//
-//    }
-
-//    public String currentuserName(){
-//        return principal.getName();
-//    }
-
-    public List<Post> getPostsByUser(Optional<User> user) {
+    public List<Post> getPostsByUser(User user) {
         return postRepository.findByUser(user);
     }
 
     public Post save(Post post) {
         return postRepository.save(post);
+    }
+
+    public Optional<Post> getPost(Long id) {
+        return postRepository.findById(id);
     }
 }

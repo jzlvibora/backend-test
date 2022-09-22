@@ -36,8 +36,7 @@ public class UserAuthService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user=userRepository.findByUsername(username).orElseThrow(null);
-
+        User user=userRepository.findByUsername(username);
         List<UserRole> userRoles = user.getUserRoles().stream().collect(Collectors.toList());
 
         List<GrantedAuthority> grantedAuthorities = userRoles.stream().map(r->{
@@ -48,9 +47,9 @@ public class UserAuthService implements UserDetailsService {
     }
 
     public void saveUser(Request request){
-        if(userRepository.findByUsername(request.getUsername()).isPresent()){
-            throw new RuntimeException("User already exists");
-        }
+//        if(userRepository.findByUsername(request.getUsername()).isPresent()){
+//            throw new RuntimeException("User already exists");
+//        }
 
         User user = new User();
         user.setUsername(request.getUsername());
