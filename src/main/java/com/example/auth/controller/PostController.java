@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -33,14 +34,16 @@ public class PostController {
     }
 
     @GetMapping
+    @Transactional(readOnly = true)
     public ResponseEntity<List<Post>> getAllPosts(){
         return status(HttpStatus.OK).body(postService.getAllPosts());
     }
 
 
     @GetMapping("by-user")
+    @Transactional(readOnly = true)
     public ResponseEntity<List<Post>> getPostsByUsername(Principal principal){
-        String  currentUserName = principal.getName();
+        String  currentUserName = principal.getName().toString();
 //        System.out.println(currentUserName);
         User currentUser = userRepository.findByUsername(currentUserName);
         return status(HttpStatus.OK).body(postService.getPostsByUser(currentUser));
