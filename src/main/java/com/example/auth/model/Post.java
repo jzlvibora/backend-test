@@ -1,9 +1,7 @@
 package com.example.auth.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -14,6 +12,8 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 @Entity
+@Getter
+@Setter
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -25,6 +25,8 @@ public class Post {
     @Lob
     private String body;
     private Integer likes;
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="userId", referencedColumnName="id")
     private User user;
