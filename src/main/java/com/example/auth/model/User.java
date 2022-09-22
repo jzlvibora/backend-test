@@ -18,7 +18,7 @@ import java.util.Set;
 @Setter
 public class User {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String username;
     private String userPass;
