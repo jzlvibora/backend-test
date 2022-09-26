@@ -24,9 +24,9 @@ public class User {
     private String userPass;
 //    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
 //    private Set<UserRole> userRoles=new HashSet<>();
-//    private String email;
-//    private Instant created;
-//    private boolean enabled;
+    private String email;
+    private Instant created;
+    private boolean enabled;
 //
 //    public int getId() {
 //        return id;
