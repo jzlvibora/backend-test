@@ -24,6 +24,7 @@ public class Post implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    private String author;
     @Nullable
     private String image;
     @Nullable
