@@ -5,9 +5,11 @@ import com.example.auth.model.Post;
 import com.example.auth.model.Tag;
 import com.example.auth.model.User;
 import com.example.auth.repository.PostRepository;
+import com.example.auth.repository.TagRepository;
 import com.example.auth.repository.UserRepository;
 import com.example.auth.service.AuthService;
 import com.example.auth.service.PostService;
+import com.example.auth.service.TagService;
 import lombok.AllArgsConstructor;
 import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ import static org.springframework.http.ResponseEntity.status;
 public class PostController {
     private final PostService postService;
     private AuthService authService;
+    private TagRepository tagRepository;
+    private TagService tagService;
 
 
     @Autowired
@@ -40,6 +44,13 @@ public class PostController {
         String  currentUserName = principal.getName();
         User currentUser = userRepository.findByUsername(currentUserName).orElseThrow(null);
         post.setUser(currentUser);
+//        Tag tag = tagRepository.findById(post.getTag().getId());
+//        boolean isExisting= tagRepository.findById(post.getTag().getId()).isPresent();
+//        if(isExisting){
+//            post.setTag(post.getTag());
+//        }
+        Tag tag = tagService.getTag(post.getTag().getId());
+        post.setTag(tag);
         postService.save(post);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
