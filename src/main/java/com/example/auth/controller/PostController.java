@@ -52,6 +52,7 @@ public class PostController {
 //        }
         Tag tag = tagService.getTag(post.getTag().getId());
         post.setTag(tag);
+        post.setAuthor(currentUser.getUsername());
         postService.save(post);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
