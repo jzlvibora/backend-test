@@ -19,7 +19,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-public class Post  {
+public class Post implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,6 +39,7 @@ public class Post  {
     private User user;
 
     //may doubt sa pagalalagay ng cascade dito. ibig sabihin pag binura ko yung post mabubura din lahat ng tag ?
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="tagId", referencedColumnName = "id")
     private Tag tag;
