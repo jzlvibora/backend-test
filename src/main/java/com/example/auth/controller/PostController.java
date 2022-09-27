@@ -26,6 +26,7 @@ import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.status;
 
+@CrossOrigin(value = "http://localhost:4200")
 @RestController
 @RequestMapping("/posts")
 @AllArgsConstructor

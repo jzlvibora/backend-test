@@ -3,6 +3,7 @@ package com.example.auth.controller;
 import com.example.auth.model.Tag;
 import com.example.auth.repository.TagRepository;
 import com.example.auth.service.TagService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +13,10 @@ import java.util.List;
 
 import static org.springframework.http.ResponseEntity.status;
 
+@CrossOrigin(value = "http://localhost:4200")
 @RestController
 @RequestMapping("/tags")
+@AllArgsConstructor
 public class TagController {
     @Autowired
     private  TagService tagService;
