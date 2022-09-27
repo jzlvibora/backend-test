@@ -24,6 +24,6 @@ public class Tag {
     private String description;
     @CreationTimestamp
     private LocalDateTime createdAt;
-    @OneToMany(fetch=FetchType.LAZY,  mappedBy="tag")
-    private List<Post> posts = new ArrayList<Post>();
+//    @OneToMany(fetch=FetchType.LAZY,  mappedBy="tag")
+//    private List<Post> posts = new ArrayList<Post>();
 }
