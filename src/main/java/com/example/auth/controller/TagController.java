@@ -34,4 +34,7 @@ public class TagController {
     public ResponseEntity<List<Tag>> getAllTags(){
         return status(HttpStatus.OK).body(tagService.getAllTags());
     }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Tag> getTag(@PathVariable Long id){return status(HttpStatus.OK).body(tagService.getTag(id));}
 }

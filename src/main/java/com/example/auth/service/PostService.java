@@ -26,6 +26,7 @@ public class PostService {
 private final PostRepository postRepository;
 private final UserRepository userRepository;
 private AuthService authService;
+private TagService tagService;
 
     public Post getPost(Long id) {
        Post post = postRepository.findById(id).orElseThrow(()->new PostNotFoundException(id.toString()));
@@ -59,5 +60,17 @@ private AuthService authService;
 
     public void deletePost(Long id) {
       postRepository.deleteById(id);
+    }
+
+    public void updatePost(Long id, Post post) {
+        Post postToUpdate=postRepository.findById(id).get();
+        postToUpdate.setTitle(post.getTitle());
+        Tag newTag= tagService.getTagByTagName(post.getTag().getTagName());
+        postToUpdate.setTag(newTag);
+        postToUpdate.setBody(post.getBody());
+        postToUpdate.setImage(post.getImage());
+        postToUpdate.setLikes(post.getLikes());
+       postRepository.save(postToUpdate);
+
     }
 }

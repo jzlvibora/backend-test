@@ -50,11 +50,17 @@ public class PostController {
 //        if(isExisting){
 //            post.setTag(post.getTag());
 //        }
-        Tag tag = tagService.getTag(post.getTag().getId());
+        Tag tag = tagService.getTagByTagName(post.getTag().getTagName());
         post.setTag(tag);
         post.setAuthor(currentUser.getUsername());
         postService.save(post);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post post){
+        postService.updatePost(id,post);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping

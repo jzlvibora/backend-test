@@ -22,6 +22,11 @@ public class TagService {
         return tag;
     }
 
+    public Tag getTagByTagName(String tagName){
+        Tag tag = tagRepository.findByTagName(tagName).orElseThrow(()->new TagNotFoundException(tagName));
+        return tag;
+    }
+
     public Tag save(Tag tag){
         return tagRepository.save(tag);
     }
