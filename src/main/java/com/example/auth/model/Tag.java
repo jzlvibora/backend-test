@@ -1,9 +1,7 @@
 package com.example.auth.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.sun.istack.NotNull;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -20,8 +18,11 @@ public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String tagName;
+    @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 //    @OneToMany(fetch=FetchType.LAZY,  mappedBy="tag")

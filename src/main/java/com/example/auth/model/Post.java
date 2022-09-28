@@ -1,6 +1,7 @@
 package com.example.auth.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -23,14 +24,17 @@ public class Post implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String author;
-    @Nullable
+    @Column(nullable = false)
     private String image;
     @Nullable
     @Lob
     private String body;
     private Integer likes;
+    @Column(nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
