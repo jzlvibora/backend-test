@@ -1,11 +1,21 @@
 package com.example.auth.dao;
 
+import java.time.Instant;
 import java.util.List;
 
 public class Request {
     private String username;
     private String userpwd;
+    private String email;
 //    private List<String> roles;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getUsername() {
         return username;

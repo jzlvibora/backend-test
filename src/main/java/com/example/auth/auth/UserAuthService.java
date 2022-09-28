@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -51,6 +52,9 @@ public class UserAuthService implements UserDetailsService {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setUserPass(passwordEncoder.encode(request.getUserpwd()));
+        user.setCreated(Instant.now());
+        user.setEmail(request.getEmail());
+        user.setEnabled(true);
         userRepository.save(user);
     }
 }

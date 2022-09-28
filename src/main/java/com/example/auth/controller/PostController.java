@@ -1,11 +1,15 @@
 package com.example.auth.controller;
 
+import com.example.auth.dto.PostResponse;
 import com.example.auth.model.Post;
+import com.example.auth.model.Tag;
 import com.example.auth.model.User;
 import com.example.auth.repository.PostRepository;
+import com.example.auth.repository.TagRepository;
 import com.example.auth.repository.UserRepository;
 import com.example.auth.service.AuthService;
 import com.example.auth.service.PostService;
+import com.example.auth.service.TagService;
 import lombok.AllArgsConstructor;
 import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +26,15 @@ import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.status;
 
+@CrossOrigin(value = "http://localhost:4200")
 @RestController
 @RequestMapping("/posts")
 @AllArgsConstructor
 public class PostController {
     private final PostService postService;
     private AuthService authService;
+    private TagRepository tagRepository;
+    private TagService tagService;
 
 
     @Autowired
@@ -38,8 +45,22 @@ public class PostController {
         String  currentUserName = principal.getName();
         User currentUser = userRepository.findByUsername(currentUserName).orElseThrow(null);
         post.setUser(currentUser);
+//        Tag tag = tagRepository.findById(post.getTag().getId());
+//        boolean isExisting= tagRepository.findById(post.getTag().getId()).isPresent();
+//        if(isExisting){
+//            post.setTag(post.getTag());
+//        }
+        Tag tag = tagService.getTagByTagName(post.getTag().getTagName());
+        post.setTag(tag);
+        post.setAuthor(currentUser.getUsername());
         postService.save(post);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post post){
+        postService.updatePost(id,post);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping
@@ -61,10 +82,16 @@ public class PostController {
         return status(HttpStatus.OK).body(postService.getPost(id));
     }
 
-//    @GetMapping("by-tag/{id}")
-//    public ResponseEntity<List<PostResponse>> getPostsByTag(Long id){
-//        return status(HttpStatus.OK).body(postService.getPostsByTag(id));
-//    }
+    @GetMapping("by-tag/{id}")
+    public ResponseEntity<List<Post>> getPostsByTag(Tag tag){
+        return status(HttpStatus.OK).body(postService.getPostsByTag(tag));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Post> deletePost(@PathVariable Long id){
+        postService.deletePost(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 }

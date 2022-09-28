@@ -2,6 +2,7 @@ package com.example.auth.service;
 
 import com.example.auth.exception.PostNotFoundException;
 import com.example.auth.model.Post;
+import com.example.auth.model.Tag;
 import com.example.auth.model.User;
 import com.example.auth.repository.PostRepository;
 import com.example.auth.repository.UserRepository;
@@ -25,6 +26,7 @@ public class PostService {
 private final PostRepository postRepository;
 private final UserRepository userRepository;
 private AuthService authService;
+private TagService tagService;
 
     public Post getPost(Long id) {
        Post post = postRepository.findById(id).orElseThrow(()->new PostNotFoundException(id.toString()));
@@ -50,5 +52,25 @@ private AuthService authService;
 
     public List<Post> getPostsByUser(User user) {
         return postRepository.findByUser(user);
+    }
+
+    public List<Post> getPostsByTag(Tag tag) {
+        return postRepository.findByTag(tag);
+    }
+
+    public void deletePost(Long id) {
+      postRepository.deleteById(id);
+    }
+
+    public void updatePost(Long id, Post post) {
+        Post postToUpdate=postRepository.findById(id).get();
+        postToUpdate.setTitle(post.getTitle());
+        Tag newTag= tagService.getTagByTagName(post.getTag().getTagName());
+        postToUpdate.setTag(newTag);
+        postToUpdate.setBody(post.getBody());
+        postToUpdate.setImage(post.getImage());
+        postToUpdate.setLikes(post.getLikes());
+       postRepository.save(postToUpdate);
+
     }
 }

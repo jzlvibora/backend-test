@@ -58,9 +58,10 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/*").
+        registry.addMapping("/**").
                 allowedOrigins("*").
                 allowedMethods("*").
+                exposedHeaders("*").
                 allowedHeaders("*").
                 allowCredentials(true);
     }
