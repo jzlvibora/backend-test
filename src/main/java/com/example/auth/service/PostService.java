@@ -8,6 +8,9 @@ import com.example.auth.repository.PostRepository;
 import com.example.auth.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,10 +26,15 @@ import java.util.Optional;
 @Slf4j
 @Transactional
 public class PostService {
-private final PostRepository postRepository;
+    @Autowired
+    private  PostRepository postRepository;
 private final UserRepository userRepository;
 private AuthService authService;
 private TagService tagService;
+
+public Page<Post> findAll(Pageable pageable){
+    return postRepository.findAll(pageable);
+}
 
     public Post getPost(Long id) {
        Post post = postRepository.findById(id).orElseThrow(()->new PostNotFoundException(id.toString()));
