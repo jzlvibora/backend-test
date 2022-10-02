@@ -44,4 +44,8 @@ public class CommentService {
 
     }
 
+    public List<Comment> getCommentsForPost(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(()->new PostNotFoundException(postId.toString()));
+        return commentRepository.findByPost(post);
+    }
 }
