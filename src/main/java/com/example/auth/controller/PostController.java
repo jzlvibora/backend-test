@@ -13,6 +13,9 @@ import com.example.auth.service.TagService;
 import lombok.AllArgsConstructor;
 import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -39,6 +42,12 @@ public class PostController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @GetMapping("list")
+    public Page<Post> getPostList(@RequestParam(defaultValue = "0") int page , @RequestParam(defaultValue = "10" ) int size){
+Pageable paging = PageRequest.of(page,size);
+return postService.findAll(paging);
+    }
 
     @PostMapping
     public ResponseEntity<Void> createPost(@RequestBody Post post, Principal principal){

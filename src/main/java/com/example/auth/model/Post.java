@@ -34,6 +34,7 @@ public class Post implements Serializable {
     @Lob
     private String body;
     private Integer likes;
+    private boolean isLiked;
     @Column(nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
