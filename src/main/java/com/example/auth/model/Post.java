@@ -33,7 +33,8 @@ public class Post implements Serializable {
     @Nullable
     @Lob
     private String body;
-    private Integer likes;
+    @NotNull
+    private Integer likes = 0;
     private boolean isLiked;
     @Column(nullable = false)
     @CreationTimestamp
