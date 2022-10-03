@@ -11,6 +11,7 @@ import java.util.List;
 
 import static org.springframework.http.ResponseEntity.status;
 
+@CrossOrigin(value = "http://localhost:4200")
 @RestController
 @RequestMapping("comments")
 @AllArgsConstructor
