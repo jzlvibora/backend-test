@@ -12,8 +12,9 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Set;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -46,7 +47,11 @@ public class Post implements Serializable {
 
     //may doubt sa pagalalagay ng cascade dito. ibig sabihin pag binura ko yung post mabubura din lahat ng tag ?
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="tagId", referencedColumnName = "id")
     private Tag tag;
+
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "post")
+//    @JoinColumn(name="postId")
+    private Set<Comment> comments;
 }
