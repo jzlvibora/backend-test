@@ -1,20 +1,20 @@
 package com.example.auth.model;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
+@Getter
+@Setter
+
 public class Vote {
     @Id
     @GeneratedValue(strategy=IDENTITY)
