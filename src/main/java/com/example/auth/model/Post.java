@@ -51,7 +51,6 @@ public class Post implements Serializable {
     @JoinColumn(name="tagId", referencedColumnName = "id")
     private Tag tag;
 
-    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "post")
-//    @JoinColumn(name="postId")
-    private Set<Comment> comments;
+//    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "post")
+//    private Set<Comment> comments;
 }

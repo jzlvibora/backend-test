@@ -1,9 +1,12 @@
 package com.example.auth.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -15,11 +18,12 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Getter
 @Setter
 
-public class Vote {
+public class Vote implements Serializable {
     @Id
     @GeneratedValue(strategy=IDENTITY)
     private Long voteId;
     private VoteType voteType;
+    @JsonIgnore
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="postId", referencedColumnName = "id")

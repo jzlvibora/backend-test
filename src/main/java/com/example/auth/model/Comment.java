@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.annotation.processing.Generated;
 import javax.persistence.*;
@@ -24,15 +26,16 @@ public class Comment implements Serializable {
     private String text;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch= FetchType.LAZY)
-//    @JoinColumn(name="postId", referencedColumnName = "id")
+    @ManyToOne(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="postId", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
 
 
     private Long postIdentity;
     private Instant createdAt;
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="userId", referencedColumnName = "id")
     private User user;
