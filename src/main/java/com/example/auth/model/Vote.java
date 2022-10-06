@@ -1,25 +1,29 @@
 package com.example.auth.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
-public class Vote {
+@Getter
+@Setter
+
+public class Vote implements Serializable {
     @Id
     @GeneratedValue(strategy=IDENTITY)
     private Long voteId;
     private VoteType voteType;
+    @JsonIgnore
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="postId", referencedColumnName = "id")
